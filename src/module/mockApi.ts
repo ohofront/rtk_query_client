@@ -1,6 +1,16 @@
 import { Todo } from '../models/todo';
 import { AxiosBaseQueryArgs } from './baseApi';
 
+export class MockApiError extends Error {
+  status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = 'MockApiError';
+    this.status = status;
+  }
+}
+
 const STORAGE_KEY = 'RTK_QUERY_TODOS';
 
 // 초기 데모 데이터
@@ -77,7 +87,7 @@ export const handleMockRequest = async (args: AxiosBaseQueryArgs): Promise<{ dat
     });
 
     if (!targetTodo) {
-      throw { status: 404, message: `Todo ID ${id}를 찾을 수 없습니다.` };
+      throw new MockApiError(404, `Todo ID ${id}를 찾을 수 없습니다.`);
     }
 
     saveTodos(updated);
@@ -92,5 +102,5 @@ export const handleMockRequest = async (args: AxiosBaseQueryArgs): Promise<{ dat
     return { data: { success: true, id } };
   }
 
-  throw { status: 404, message: `지원하지 않는 Mock API 경로입니다: ${methodUpper} ${url}` };
+  throw new MockApiError(404, `지원하지 않는 Mock API 경로입니다: ${methodUpper} ${url}`);
 };
