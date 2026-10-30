@@ -10,6 +10,7 @@
 - **RTK Query 기반 서버 상태 관리**:
   - `createApi` 및 `injectEndpoints`를 활용한 모듈식 API 관리
   - 커스텀 `axiosBaseQuery`를 구현하여 Axios 인스턴스와 RTK Query의 강력한 캐싱 기능 결합
+  - **백엔드 없는 환경(Netlify 정적 호스팅 등)을 위한 LocalStorage Mock 모드 자동 지원** (`REACT_APP_API_BASE_URL` 미설정 시 브라우저 로컬 저장소를 활용하여 CRUD 및 자동 캐싱 시뮬레이션 지원)
   - `providesTags`와 `invalidatesTags`를 통한 데이터 변경 시 자동 캐시 무효화 및 리패칭(Auto-refetching)
 - **엄격한 TypeScript 타이핑**:
   - Todo 모델, API 요청/응답, Redux RootState/AppDispatch의 완전한 타입 안정성 확보

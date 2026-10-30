@@ -53,7 +53,12 @@ const TodoList = () => {
       <BackButton onClick={() => navigate('/')}>← 홈으로 돌아가기</BackButton>
 
       <TodoListTemplate>
-        <Title>To Do List</Title>
+        <Title>
+          To Do List
+          {!process.env.REACT_APP_API_BASE_URL && (
+            <Badge>LocalStorage Mock Mode</Badge>
+          )}
+        </Title>
 
         <FormWrapper onSubmit={handleCreate}>
           <StyledInput
@@ -135,13 +140,26 @@ const TodoListTemplate = styled.div`
 `;
 
 const Title = styled.div`
-  padding: 2rem;
+  padding: 1.75rem 2rem 1.25rem;
   font-size: 2.2rem;
   text-align: center;
   font-weight: 300;
   background: #22b8cf;
   color: white;
   letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const Badge = styled.span`
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  letter-spacing: 0;
 `;
 
 const FormWrapper = styled.form`
